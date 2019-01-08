@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 
 
-let witInstance;
+let witInstance, hadrianInstance;
 
 //number of rows in the sortable tables
 tableRows = function (){
@@ -9,8 +9,12 @@ tableRows = function (){
   return 15;
 }
 
-setWitInstance2 = function(inst){
+setWitInstanceTable = function(inst){
   witInstance = inst;
+}
+
+setHadrianInstanceTable = function(inst){
+	hadrianInstance = inst;
 }
 
 ////////////////////////////////////////////
@@ -33,38 +37,43 @@ Meteor.startup(function(){
 	//     }
 	//   },
 	//   'click .evaluateit': function(e){
+	//     console.log("==> new WIT evaluation",e.target);
 	//     evaluateWIT(e.target.value);
 	//   },
 	//   'click .cancelit': function(e){
-	//     alert("coming soon");
+	//     alert("Cancel and redeem: coming soon");
+	//   },
+	//   'click .downloadit': function(e){
+	//     alert("Download receipt: coming soon");
 	//   }
 	// });
 
 	// async function acceptProposal(v){
 	//   let vals = v.split(",");
-	//   let ethAsk = vals[0]
+	//   let weiAsk = vals[0];
 	//   let id = vals[1];
 
-	//   try {
-	//     // console.log("====> new WIT acceptance");
-	//     // console.log("ethAsk", ethAsk);
-	//     // console.log("proposal token ID", id);
+	//   console.log("===> tables new WIT acceptance");
+	//   console.log("==> tables token ID",id,Session.get("user"),weiAsk,v)
 
-	//     //TODO don't let user accept their own proposal
-	//     await promisify(cb => witInstance.createWITAcceptance(id,{from: Session.get("user"), value:toWei(ethAsk)},cb));
-	//   } catch (error) {
-	//     console.log(error)
-	//   }
+	//   var batch = web3.createBatch();
+	//   batch.add(witInstance.createWITAcceptance.request(id,{from: Session.get("user")}));
+	//   batch.add(hadrianInstance.approve.request(witInstance.address, weiAsk, {from: Session.get("user")}));
+	//   batch.execute();
+
+	//   // try {
+	//   //   await promisify(cb => witInstance.createWITAcceptance(id,{from: Session.get("user"), value:weiAsk, gas: 2000000},cb));
+	//   // } catch (error) {
+	//   //   console.log(error);
+	//   // }
 	// }
 
-	// //evaluate WIT once its period h gas elapsed
+
 	// async function evaluateWIT(id){
+	//   //evaluate WIT once its period h gas elapsed
 	//   try {
-	//     let idodd = parseInt(id);
-	//     if(id/2 === Math.round(id/2)) idodd = parseInt(id) - 1;
-	//     // console.log("=================> new WIT evaluation");
-	//     // console.log("token ID", id, idodd, Session.get("user"));
-	//     await promisify(cb => witInstance.evaluate(idodd,"",{from: Session.get("user")},cb));
+	//     console.log("==> token ID", id, Session.get("user"));
+	//     await promisify(cb => witInstance.evaluate(id,"",{from: Session.get("user"), gas: 2000000},cb));
 	//   } catch (error) {
 	//     console.log(error)
 	//   }

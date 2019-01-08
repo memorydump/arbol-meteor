@@ -464,6 +464,7 @@ function payoutText(weiAsking,weiContributing){
 function askText(weiAsking){
 	let ask = weiAsking.toNumber();
 	let askText = `${clipNum(toEth(ask))} hUSD`;
+	console.log("askText",weiAsking,ask,askText);
 	return {v:ask,t:askText};
 }
 

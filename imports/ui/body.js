@@ -185,7 +185,8 @@ function initContracts(){
     Session.set("noaaAddress",noaaAddress)
     Session.set("nasaAddress",nasaAddress)
     setWitInstance(witInstance); //for manageWITs
-    setWitInstance2(witInstance); //for table
+    setWitInstanceTable(witInstance); //for table
+    setHadrianInstanceTable(witInstance); //for table
   })  
 }
 
